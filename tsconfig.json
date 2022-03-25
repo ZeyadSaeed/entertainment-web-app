@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "backend/dist",
+    "strict": false,
+  },
+  "include": ["backend/src", "model"],
+  "exclude": ["node_modules"]
+}
