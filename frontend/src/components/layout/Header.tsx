@@ -52,12 +52,16 @@ const Header = () => {
         />
 
         <div
-          className={`absolute top-14 bg-white text-semiDarkBlue py-2 px-4 rounded-md right-[-11px] lg:right-[-4rem] lg:top-[-4rem] duration-200 origin-top lg:origin-bottom ${
+          className={`absolute top-14 bg-white text-semiDarkBlue rounded-md right-[-11px] z-[100] lg:right-[-4rem]
+          lg:top-[-4rem] duration-200 origin-top lg:origin-bottom ${
             isAvatarActive ? "scale-y-100" : "scale-y-0"
           }`}
         >
           <div className="arrowUp" />
-          <button className="flex items-center gap-1" onClick={logout}>
+          <button
+            className="flex items-center gap-1 bg-transparent w-full h-full py-2 px-4"
+            onClick={logout}
+          >
             <BiLogOut />
             Logout
           </button>
