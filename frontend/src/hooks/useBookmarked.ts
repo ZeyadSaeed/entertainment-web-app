@@ -25,8 +25,8 @@ const useBookmarked = (
         const { data } = await axios.get(`/bookmarked/${category}`);
         if (category === "movies" || category === "all") {
           data.bookMarkedMovies.forEach(
-            (movie: { show: ShowType; _id: string }) => {
-              if (movie.show._id === movie._id) {
+            ({ show }: { show: ShowType; _id: string }) => {
+              if (show._id === movie._id) {
                 setIsBookMarked(true);
               }
             }
@@ -34,8 +34,8 @@ const useBookmarked = (
         }
         if (category === "tvseries" || category === "all") {
           data.bookMarkedTvSeries.forEach(
-            (tvseries: { show: ShowType; _id: string }) => {
-              if (tvseries.show._id === movie._id) {
+            ({ show }: { show: ShowType; _id: string }) => {
+              if (show._id === movie._id) {
                 setIsBookMarked(true);
               }
             }
