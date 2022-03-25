@@ -116,6 +116,8 @@ const SignupLogic = () => {
       setIsLoading(false);
       // NAVIGATE TO THE HOME PAGE
       navigate("/");
+      // RELOAD THE PAGE
+      window.location.reload();
     } catch (err) {
       if (!err.response) {
         return setGlobalError("No server response");
