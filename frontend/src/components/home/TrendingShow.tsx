@@ -45,7 +45,9 @@ const TrendingMovie = ({ movie }) => {
       <div className="relative inline-block">
         <div className="relative">
           <img
-            className="rounded-[8px] blackScreen peer"
+            width={470}
+            height={230}
+            className="rounded-[8px] blackScreen peer w-full h-auto"
             src={thumbnail}
             draggable="false"
             alt={movie.title}

@@ -67,7 +67,9 @@ const Show = ({ show, category }) => {
     <li className="group relative cursor-pointer mt-4 lg:mt-6">
       <div className="relative">
         <img
-          className="rounded-lg blackScreen peer"
+          width={280}
+          height={174}
+          className="rounded-lg blackScreen peer w-full h-auto"
           draggable="false"
           src={thumbnail}
           alt={show.title}

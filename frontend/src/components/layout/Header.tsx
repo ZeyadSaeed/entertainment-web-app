@@ -52,7 +52,7 @@ const Header = () => {
         />
 
         <div
-          className={`absolute top-14 bg-white text-semiDarkBlue py-2 px-4 rounded-md right-[-11px] lg:right-[-4rem] lg:top-[-4rem] duration-200 origin-bottom ${
+          className={`absolute top-14 bg-white text-semiDarkBlue py-2 px-4 rounded-md right-[-11px] lg:right-[-4rem] lg:top-[-4rem] duration-200 origin-top lg:origin-bottom ${
             isAvatarActive ? "scale-y-100" : "scale-y-0"
           }`}
         >
