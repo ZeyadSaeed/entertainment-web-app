@@ -13,29 +13,43 @@ const BookMarked = () => {
   const { setGlobalErrors } = useGlobalErrorsContext();
 
   useEffect(() => {
+    let abortController = new AbortController();
+    // SET LOADING TO TRUE
     setIsLoading(true);
-    const fetch = async () => {
-      try {
-        // FETCH DATA BASED ON USER SEARCH INPUT
-        const { data } = await axios.post("/search/bookmark", {
-          search: searchInput,
-        });
-        // ADD IT TO SEARCHED RESULT
-        setSearchedResults(data);
-        // SET IS LOADING TO FALSE
-        setIsLoading(false);
-      } catch (err) {
-        // IF THERE'S ANY ERRORS ADD IT TO GLOBAL ERRORS
-        const message = err?.response?.data;
-        setGlobalErrors([message]);
-        // SET LOADING TO FALSE
-        setIsLoading(false);
-      }
-    };
 
-    fetch();
+    if (searchInput.length > 0) {
+      const fetch = async (): Promise<void> => {
+        try {
+          // FETCH DATA BASED ON USER SEARCH INPUT
+          const { data } = await axios.post("/search/bookmark", {
+            search: searchInput,
+          });
+          // REMOVE RESULTS EQUAL TO NULL
+          const result = data.filter((r) => r !== null);
+          // ADD IT TO SEARCHED RESULT
+          setSearchedResults(result);
+          // SET IS LOADING TO FALSE
+          setIsLoading(false);
+        } catch (err) {
+          // IF THERE'S ANY ERRORS ADD IT TO GLOBAL ERRORS
+          const message = err?.response?.data;
+          setGlobalErrors([message]);
+          // SET LOADING TO FALSE
+          setIsLoading(false);
+        }
+      };
+
+      fetch();
+    } else {
+      // IF THERE IS NO SEARCH INPUT CLEAR SEARCHED RESULTS
+      setSearchedResults([]);
+    }
+
+    return () => {
+      abortController.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchInput]);
+  }, [searchInput, setSearchedResults]);
 
   return (
     <main className="py-4 pl-4 md:pl-[25px] lg:pl-[36px] w-full">
