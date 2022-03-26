@@ -41,7 +41,7 @@ Users should be able to:
 
 ### Built with
 
-- Express - Node.js
+- Node.js - Express
 - MongoDB - Mongoose
 - React - JS library
 - TailwindCSS
