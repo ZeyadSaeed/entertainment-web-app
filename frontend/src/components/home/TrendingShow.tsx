@@ -14,9 +14,6 @@ const TrendingMovie = ({ movie }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTablet: boolean = useMediaQuery({ query: "(min-width: 768px)" });
 
-  // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
-  useBookmarked(setIsLoading, setIsBookMarked, movie, "all");
-
   const { addAndRemoveBookmark } = useAddRemoveBookmark(
     isBookMarked,
     setIsLoading,
@@ -40,6 +37,8 @@ const TrendingMovie = ({ movie }) => {
     }
   }, [isTablet, trendingThumbnails]);
 
+  // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
+  useBookmarked(setIsLoading, setIsBookMarked, movie, "all");
   return (
     <li className="min-w-[240px] md:min-w-[470px] my-4 mr-4 relative cursor-pointer group">
       <div className="relative inline-block">

@@ -13,8 +13,6 @@ const Show = ({ show, category }) => {
   const isTablet: boolean = useMediaQuery({ query: "(min-width: 768px)" });
   const isDesktop: boolean = useMediaQuery({ query: "(min-width: 1440px)" });
 
-  // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
-  useBookmarked(setIsLoading, setIsBookMarked, show, category);
   const {
     bookmarkedMovies,
     setBookmarkedMovies,
@@ -62,6 +60,9 @@ const Show = ({ show, category }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTablet, isDesktop]);
+
+  // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
+  useBookmarked(setIsLoading, setIsBookMarked, show, category);
 
   return (
     <li className="group relative cursor-pointer mt-4 lg:mt-6">
