@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import axios from "../api/axios";
 import SearchedResult from "../components/common/SearchedResult";
 import useGlobalErrorsContext from "./../hooks/useGlobalErrorsContext";
+import ChangePageTitle from "./../components/ChangePageTitle";
 
 const BookMarked = () => {
   const { searchInput, setSearchedResults, setIsLoading } = useSearchContext();
@@ -53,6 +54,7 @@ const BookMarked = () => {
 
   return (
     <main className="py-4 pl-4 md:pl-[25px] lg:pl-[36px] w-full">
+      <ChangePageTitle pageTitle="Bookmarked" />
       <GlobalErrors />
       <SearchBar placeholder="Search for bookmarked shows" route="/" />
       {searchInput.length > 0 ? (

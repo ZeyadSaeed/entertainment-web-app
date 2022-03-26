@@ -6,6 +6,7 @@ import SearchBar from "../components/common/SearchBar";
 import TVseries from "../components/tvseries/TVseries";
 import SearchedResult from "../components/common/SearchedResult";
 import useGlobalErrorsContext from "./../hooks/useGlobalErrorsContext";
+import ChangePageTitle from "./../components/ChangePageTitle";
 
 const TvSeries = () => {
   const { searchInput, setSearchedResults, setIsLoading } = useSearchContext();
@@ -45,6 +46,7 @@ const TvSeries = () => {
 
   return (
     <main className="py-4 pl-4 md:pl-[25px] lg:pl-[36px] w-full">
+      <ChangePageTitle pageTitle="TV Series" />
       <GlobalErrors />
       <SearchBar placeholder="Search for TV series" route="/" />
       {searchInput.length > 0 ? <SearchedResult /> : <TVseries />}

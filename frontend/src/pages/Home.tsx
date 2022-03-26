@@ -8,6 +8,7 @@ import GlobalErrors from "../components/globalErrors/GlobalErrors";
 import Recommended from "../components/home/Recommended";
 import useSearchContext from "../hooks/useSearchContext";
 import SearchedResult from "../components/common/SearchedResult";
+import ChangePageTitle from "./../components/ChangePageTitle";
 
 const Home = () => {
   const { searchInput, setSearchedResults, setIsLoading } = useSearchContext();
@@ -51,6 +52,7 @@ const Home = () => {
 
   return (
     <main className="py-4 pl-4 md:pl-[25px] lg:pl-[36px] overflow-hidden">
+      <ChangePageTitle pageTitle="Home" />
       <GlobalErrors />
       <SearchBar placeholder="Search for movies or TV series" route="/" />
       {searchInput.length > 0 ? (
