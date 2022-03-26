@@ -12,6 +12,13 @@ const userModel_1 = require("../model/userModel");
 // MIDDLEWARE
 const authMiddleware_1 = require("../middleware/authMiddleware");
 const router = (0, express_1.Router)();
+const complexityOptions = {
+    min: 8,
+    max: 26,
+    lowerCase: 1,
+    upperCase: 1,
+    numeric: 1,
+};
 router.get("/me", authMiddleware_1.auth, async (req, res) => {
     // SEND USER OBJECT
     res.status(200).send(req.user);
@@ -26,7 +33,7 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ message: "Passwords do not match" });
     }
     // CHECK IF THE USER INPUT WEAK PASSWORD
-    const password = (0, joi_password_complexity_1.default)().validate(req.body.password);
+    const password = (0, joi_password_complexity_1.default)(complexityOptions).validate(req.body.password);
     if (password.error)
         return res
             .status(400)

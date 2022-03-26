@@ -31,6 +31,14 @@ const SignupLogic = () => {
 
   const navigate = useNavigate();
 
+  const complexityOptions = {
+    min: 8,
+    max: 26,
+    lowerCase: 1,
+    upperCase: 1,
+    numeric: 1,
+  };
+
   // HANDLE ERROR MESSAGES
   useEffect(() => {
     // REMOVE ERROR
@@ -39,7 +47,8 @@ const SignupLogic = () => {
 
   useEffect(() => {
     // CHECK FOR PASSWORD COMPLEXITY
-    const pwdComplexity = passwordComplexity().validate(passwordInput);
+    const pwdComplexity =
+      passwordComplexity(complexityOptions).validate(passwordInput);
     if (pwdComplexity.error && passwordInput.length > 0) {
       setPwdError("Weak password");
     } else {

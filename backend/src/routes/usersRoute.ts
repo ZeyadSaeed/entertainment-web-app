@@ -12,6 +12,14 @@ import { FullInfoUser } from "../interfaces/userInterface";
 import { UserRequest } from "../interfaces/authInterface";
 const router = Router();
 
+const complexityOptions = {
+  min: 8,
+  max: 26,
+  lowerCase: 1,
+  upperCase: 1,
+  numeric: 1,
+};
+
 router.get(
   "/me",
   auth,
@@ -35,7 +43,9 @@ router.post(
     }
 
     // CHECK IF THE USER INPUT WEAK PASSWORD
-    const password = passwordComplexity().validate(req.body.password);
+    const password = passwordComplexity(complexityOptions).validate(
+      req.body.password
+    );
     if (password.error)
       return res
         .status(400)
