@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 import useBookmarked from "../../hooks/useBookmarked";
 import useAddRemoveBookmark from "../../hooks/useAddRemoveBookmark";
 import PlayButtonHover from "./PlayButtonHover";
@@ -7,11 +6,8 @@ import BookmarkButton from "./BookmarkButton";
 import useBookmarkContext from "./../../hooks/useBookmarkContext";
 
 const Show = ({ show, category }) => {
-  const [thumbnail, setThumbnail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isBookMarked, setIsBookMarked] = useState<boolean>(false);
-  const isTablet: boolean = useMediaQuery({ query: "(min-width: 768px)" });
-  const isDesktop: boolean = useMediaQuery({ query: "(min-width: 1440px)" });
 
   const {
     bookmarkedMovies,
@@ -19,24 +15,13 @@ const Show = ({ show, category }) => {
     bookmarkedTVSeries,
     setBookmarkedTVSeries,
   } = useBookmarkContext();
+
   const { addAndRemoveBookmark } = useAddRemoveBookmark(
     isBookMarked,
     setIsLoading,
     setIsBookMarked,
     show
   );
-
-  const thumbPath = show.thumbnail.regular;
-  useEffect(() => {
-    if (isDesktop) {
-      setThumbnail(thumbPath.large);
-    } else if (isTablet) {
-      setThumbnail(thumbPath.medium);
-    } else {
-      setThumbnail(thumbPath.small);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTablet, isDesktop, show]);
 
   const bookmark = (): void => {
     if (category === "bookmark" && show.category === "Movie" && isBookMarked) {
@@ -61,20 +46,24 @@ const Show = ({ show, category }) => {
     addAndRemoveBookmark();
   };
 
+  const thumbPath = show.thumbnail.regular;
+
   // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
   useBookmarked(setIsLoading, setIsBookMarked, show, category);
 
   return (
     <li className="group relative cursor-pointer mt-4 lg:mt-6">
       <div className="relative">
-        <img
-          width={280}
-          height={174}
-          className="rounded-lg blackScreen peer w-full h-auto"
-          draggable="false"
-          src={thumbnail}
-          alt={show.title}
-        />
+        <picture className="peer">
+          <source media="(min-width: 1440px)" srcSet={thumbPath.large} />
+          <source media="(min-width: 768px)" srcSet={thumbPath.medium} />
+          <img
+            className="rounded-lg blackScreen w-full h-auto"
+            src={thumbPath.small}
+            alt={show.title}
+          />
+        </picture>
+
         <PlayButtonHover />
         <BookmarkButton
           isLoading={isLoading}

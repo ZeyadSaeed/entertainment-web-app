@@ -12,15 +12,16 @@ const useBookmarked = (
   const { setGlobalErrors } = useGlobalErrorsContext();
 
   useEffect(() => {
+    setIsLoading(true);
     // SHOW USER BOOKMARKED TO THE UI
     const run = async () => {
       try {
         // SET LOADING TRUE
         if (category === "bookmark") {
           setIsBookMarked(true);
+          setIsLoading(false);
           return;
         }
-        setIsLoading(true);
         // GET ALL USER BOOKMARKED
         const { data } = await axios.get(`/bookmarked/${category}`);
         if (category === "movies" || category === "all") {
@@ -48,7 +49,7 @@ const useBookmarked = (
         // ERROR MESSAGE
         const message = err?.response?.data;
         // ADD ERROR MESSAGE TO GLOBAL ERRORS TO DISPLAY TO THE USER
-        setGlobalErrors((errs: string[]) => [message]);
+        setGlobalErrors([message]);
         // SET LOADING TO FALSE
         setIsLoading(false);
       }

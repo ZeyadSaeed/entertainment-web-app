@@ -1,6 +1,5 @@
 // LIBRARIES
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 // CUSTOM HOOKS
 import useBookmarked from "../../hooks/useBookmarked";
 import useAddRemoveBookmark from "../../hooks/useAddRemoveBookmark";
@@ -9,21 +8,8 @@ import PlayButtonHover from "../common/PlayButtonHover";
 import BookmarkButton from "../common/BookmarkButton";
 
 const TrendingMovie = ({ movie }) => {
-  const [thumbnail, setThumbnail] = useState<string>("");
   const [isBookMarked, setIsBookMarked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const isTablet: boolean = useMediaQuery({ query: "(min-width: 768px)" });
-
-  const trendingThumbnails = movie.thumbnail.trending;
-
-  useEffect(() => {
-    // SET THUMBNAIL BASED ON SCREEN SIZE
-    if (isTablet) {
-      setThumbnail(trendingThumbnails.large);
-    } else {
-      setThumbnail(trendingThumbnails.small);
-    }
-  }, [isTablet, trendingThumbnails, movie]);
 
   const { addAndRemoveBookmark } = useAddRemoveBookmark(
     isBookMarked,
@@ -37,20 +23,22 @@ const TrendingMovie = ({ movie }) => {
     addAndRemoveBookmark();
   };
 
+  const thumbPath = movie.thumbnail.trending;
+
   // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
   useBookmarked(setIsLoading, setIsBookMarked, movie, "all");
   return (
     <li className="min-w-[240px] md:min-w-[470px] my-4 mr-4 relative cursor-pointer group">
       <div className="relative inline-block">
         <div className="relative">
-          <img
-            width={470}
-            height={230}
-            className="rounded-[8px] blackScreen peer w-full h-auto"
-            src={thumbnail}
-            draggable="false"
-            alt={movie.title}
-          />
+          <picture className="peer">
+            <source media="(min-width: 768px)" srcSet={thumbPath.large} />
+            <img
+              className="rounded-[8px] blackScreen peer w-full h-auto"
+              src={thumbPath.small}
+              alt={movie.title}
+            />
+          </picture>
 
           <BookmarkButton
             isBookMarked={isBookMarked}
