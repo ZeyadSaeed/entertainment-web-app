@@ -23,7 +23,7 @@ const TrendingMovie = ({ movie }) => {
     } else {
       setThumbnail(trendingThumbnails.small);
     }
-  }, [isTablet, trendingThumbnails]);
+  }, [isTablet, trendingThumbnails, movie]);
 
   const { addAndRemoveBookmark } = useAddRemoveBookmark(
     isBookMarked,

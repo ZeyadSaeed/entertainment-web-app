@@ -36,7 +36,7 @@ const Show = ({ show, category }) => {
       setThumbnail(thumbPath.small);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isTablet, isDesktop]);
+  }, [isTablet, isDesktop, show]);
 
   const bookmark = (): void => {
     if (category === "bookmark" && show.category === "Movie" && isBookMarked) {
