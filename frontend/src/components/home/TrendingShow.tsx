@@ -14,6 +14,17 @@ const TrendingMovie = ({ movie }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTablet: boolean = useMediaQuery({ query: "(min-width: 768px)" });
 
+  const trendingThumbnails = movie.thumbnail.trending;
+
+  useEffect(() => {
+    // SET THUMBNAIL BASED ON SCREEN SIZE
+    if (isTablet) {
+      setThumbnail(trendingThumbnails.large);
+    } else {
+      setThumbnail(trendingThumbnails.small);
+    }
+  }, [isTablet, trendingThumbnails]);
+
   const { addAndRemoveBookmark } = useAddRemoveBookmark(
     isBookMarked,
     setIsLoading,
@@ -25,17 +36,6 @@ const TrendingMovie = ({ movie }) => {
     // ON BOOKMARK CLICK ADD OR REMOVE THE SHOW FROM BOOKMARKED
     addAndRemoveBookmark();
   };
-
-  const trendingThumbnails = movie.thumbnail.trending;
-
-  useEffect(() => {
-    // SET THUMBNAIL BASED ON SCREEN SIZE
-    if (isTablet) {
-      setThumbnail(trendingThumbnails.large);
-    } else {
-      setThumbnail(trendingThumbnails.small);
-    }
-  }, [isTablet, trendingThumbnails]);
 
   // HOOK TO CHECK FOR THE USER BOOKMARKED AND SHOW IT TO THE UI ON PAGE RELOAD
   useBookmarked(setIsLoading, setIsBookMarked, movie, "all");
