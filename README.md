@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/ZeyadSaeed/entertainment-web-app)
-- Live Site URL: [Add live site URL here](https://entertainmentwebapp.herokuapp.com/)
+- Solution URL: [here](https://github.com/ZeyadSaeed/entertainment-web-app)
+- Live Site URL: [here](https://entertainmentwebapp.herokuapp.com/)
 
 
 ## My process
